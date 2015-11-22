@@ -21,4 +21,5 @@ pub const VIRTUALENV_BG : &'static str = BLACK;
 pub const VIRTUALENV_FG : &'static str = ORANGE;
 
 pub const PATH_BG : &'static str = BLUE;
+pub const PATH_ARROWS : &'static str = BLACK;
 pub const PATH_FG : &'static str = LIGHT;

@@ -21,7 +21,7 @@ fn main() {
     let virtualenv_segment : Option<String> = virtualenv_segment();
     let second_segment : String = path_segments();
 
-    print!("{clean}{error}",
+    print!("{clean}{error} ",
              clean=clean_colors,
              error=first_segment,
              );
@@ -44,7 +44,7 @@ fn main() {
         }
     }
 
-    print!("{path}{c}{clean} ",
+    print!("{path} {c}{clean} ",
              c=connect_last(colors::PATH_BG),
              clean=clean_colors,
              path=second_segment);

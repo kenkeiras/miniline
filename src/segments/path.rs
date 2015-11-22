@@ -2,6 +2,7 @@ use std::env;
 use std::path::Path;
 use std::path::PathBuf;
 
+use std::borrow::Borrow;
 use symbols::empty_arrow;
 
 use segments::colors;
@@ -45,26 +46,21 @@ fn path_segments_from_root(cwd : &Path) -> String {
             first = false;
         }
         else { // Add followup from the last segment
-            segment.push_str("\\[\x1b[1;3");
-            segment.push_str(colors::PATH_BG);
-            segment.push_str(";4");
-            segment.push_str(colors::PATH_BG);
-            segment.push_str("m\\] ");
-
-            segment.push_str(empty_arrow());
+            segment.push_str(
+                format!(" \\[\x1b[0;3{arrow_color};4{bg}m\\]{arrow}",
+                        arrow_color=colors::PATH_ARROWS,
+                        bg=colors::PATH_BG,
+                        arrow=empty_arrow())
+                    .borrow());
         }
 
-        segment.push_str("\\[\x1b[0;38;5;1");
-        segment.push_str(colors::PATH_FG);
-        segment.push_str(";4");
-        segment.push_str(colors::PATH_BG);
-        segment.push_str("m\\] ");
-
-        segment.push_str(part);
+        segment.push_str(
+            format!("\\[\x1b[0;38;5;1{fg};4{bg}m\\] {part}",
+                    fg=colors::PATH_FG,
+                    bg=colors::PATH_BG,
+                    part=part)
+                .borrow());
     }
-
-
-    segment.push_str(" ");
 
     segment
 }

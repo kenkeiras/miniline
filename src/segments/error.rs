@@ -6,22 +6,14 @@ use segments::colors;
  * Build a segment specifying if the last command was succesful.
  */
 pub fn error_segment(error: bool) -> String {
-    let mut segment : String = "".to_string();
     if error {
-        segment.push_str("\\[\x1b[91;4");
-        segment.push_str(colors::LAST_RESULT_BG);
-        segment.push_str("m\\] ");
-
-        segment.push_str(cross());
+        format!("\\[\x1b[91;4{bg}m\\] {cross}",
+                bg=colors::LAST_RESULT_BG,
+                cross=cross())
     }
     else {
-        segment.push_str("\\[\x1b[92;4");
-        segment.push_str(colors::LAST_RESULT_BG);
-        segment.push_str("m\\] ");
-
-        segment.push_str(tick());
+        format!("\\[\x1b[92;4{bg}m\\] {tick}",
+                bg=colors::LAST_RESULT_BG,
+                tick=tick())
     }
-
-    segment.push_str(" ");
-    segment
 }
