@@ -16,5 +16,9 @@ const DARK : &'static str = "6";
 
 // Color selections
 pub const LAST_RESULT_BG : &'static str = BLACK;
+
+pub const VIRTUALENV_BG : &'static str = BLACK;
+pub const VIRTUALENV_FG : &'static str = ORANGE;
+
 pub const PATH_BG : &'static str = BLUE;
 pub const PATH_FG : &'static str = LIGHT;
