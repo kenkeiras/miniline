@@ -70,7 +70,17 @@ fn path_segments_from_root(cwd : &Path) -> String {
  * Build a segment displaying the current path.
  */
 pub fn path_segments() -> String {
-    let cwd = env::current_dir().unwrap();
+    let cwd = match env::current_dir() {
+        Ok(x) => x,
+
+        // On error, try with the PWD environment variable
+        Error => match env::var_os("PWD") {
+            Some(x) => PathBuf::from(x),
+
+            None => PathBuf::from("Current directory undefined"),
+        },
+    };
+
 
     let segments : String = match env::home_dir() {
         None => path_segments_from_root(cwd.as_path()),
